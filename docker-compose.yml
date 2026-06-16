@@ -1,0 +1,81 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ntc_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ntc}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ntcdev}
+      POSTGRES_DB: ${POSTGRES_DB:-ntc_gestionale}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ntc} -d ${POSTGRES_DB:-ntc_gestionale}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # ===== DEV (default) — HMR, compila al volo, lento al primo click =====
+  app:
+    profiles: ["dev", "default"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: dev
+    container_name: ntc_app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-ntc}:${POSTGRES_PASSWORD:-ntcdev}@db:5432/${POSTGRES_DB:-ntc_gestionale}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3001}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-dev-secret-change-me-in-prod}
+      UPLOADS_DIR: /app/uploads
+      NODE_ENV: development
+      HOSTNAME: 0.0.0.0
+      # File-watch via polling: su Windows gli eventi inotify non attraversano
+      # il bind-mount, quindi senza questo l'HMR non si accorge delle modifiche.
+      WATCHPACK_POLLING: "true"
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+      - next_cache:/app/.next
+      - uploads:/app/uploads
+    ports:
+      - "${APP_PORT:-3001}:3000"
+    tty: true
+    stdin_open: true
+
+  # ===== PROD — build una volta, poi navigazione fulminea =====
+  app-prod:
+    profiles: ["prod"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: prod
+    container_name: ntc_app_prod
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-ntc}:${POSTGRES_PASSWORD:-ntcdev}@db:5432/${POSTGRES_DB:-ntc_gestionale}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3001}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-dev-secret-change-me-in-prod}
+      UPLOADS_DIR: /app/uploads
+      NODE_ENV: production
+      HOSTNAME: 0.0.0.0
+    volumes:
+      - uploads:/app/uploads
+    ports:
+      - "${APP_PORT:-3001}:3000"
+
+volumes:
+  db_data:
+  node_modules:
+  next_cache:
+  uploads:

@@ -1,0 +1,14 @@
+{
+  "name": "navaltecnica-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "description": "E2E flusso Service Navaltecnica (Playwright) — isolato dai node_modules dell'app (Docker)",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

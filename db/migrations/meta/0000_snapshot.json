@@ -1,0 +1,4088 @@
+{
+  "id": "f61401be-095f-4d78-aaa5-64354bfd43e3",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.clienti": {
+      "name": "clienti",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_cliente",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ragione_sociale": {
+          "name": "ragione_sociale",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nome_breve": {
+          "name": "nome_breve",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "partita_iva": {
+          "name": "partita_iva",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "codice_fiscale": {
+          "name": "codice_fiscale",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "indirizzo": {
+          "name": "indirizzo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "citta": {
+          "name": "citta",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cap": {
+          "name": "cap",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paese": {
+          "name": "paese",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'IT'"
+        },
+        "pec": {
+          "name": "pec",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sdi_code": {
+          "name": "sdi_code",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "termini_pagamento_giorni": {
+          "name": "termini_pagamento_giorni",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "attivo": {
+          "name": "attivo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "clienti_nome_breve_idx": {
+          "name": "clienti_nome_breve_idx",
+          "columns": [
+            {
+              "expression": "nome_breve",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "clienti_rag_soc_idx": {
+          "name": "clienti_rag_soc_idx",
+          "columns": [
+            {
+              "expression": "ragione_sociale",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "clienti_tipo_idx": {
+          "name": "clienti_tipo_idx",
+          "columns": [
+            {
+              "expression": "tipo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.fornitori": {
+      "name": "fornitori",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ragione_sociale": {
+          "name": "ragione_sociale",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "partita_iva": {
+          "name": "partita_iva",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telefono": {
+          "name": "telefono",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paese": {
+          "name": "paese",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'IT'"
+        },
+        "tempi_consegna_giorni_medi": {
+          "name": "tempi_consegna_giorni_medi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "attivo": {
+          "name": "attivo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.imbarcazioni": {
+      "name": "imbarcazioni",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hull_number": {
+          "name": "hull_number",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "modello": {
+          "name": "modello",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cantiere_costruttore_id": {
+          "name": "cantiere_costruttore_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "proprietario_attuale_id": {
+          "name": "proprietario_attuale_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "armatore": {
+          "name": "armatore",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "metri": {
+          "name": "metri",
+          "type": "numeric(6, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "anno_costruzione": {
+          "name": "anno_costruzione",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bandiera": {
+          "name": "bandiera",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "imbarcazioni_nome_idx": {
+          "name": "imbarcazioni_nome_idx",
+          "columns": [
+            {
+              "expression": "nome",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "imbarcazioni_hull_idx": {
+          "name": "imbarcazioni_hull_idx",
+          "columns": [
+            {
+              "expression": "hull_number",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "imbarcazioni_cantiere_idx": {
+          "name": "imbarcazioni_cantiere_idx",
+          "columns": [
+            {
+              "expression": "cantiere_costruttore_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "imbarcazioni_cantiere_hull_uq": {
+          "name": "imbarcazioni_cantiere_hull_uq",
+          "columns": [
+            {
+              "expression": "cantiere_costruttore_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "hull_number",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "where": "\"imbarcazioni\".\"hull_number\" IS NOT NULL",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "imbarcazioni_cantiere_costruttore_id_clienti_id_fk": {
+          "name": "imbarcazioni_cantiere_costruttore_id_clienti_id_fk",
+          "tableFrom": "imbarcazioni",
+          "tableTo": "clienti",
+          "columnsFrom": [
+            "cantiere_costruttore_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "imbarcazioni_proprietario_attuale_id_clienti_id_fk": {
+          "name": "imbarcazioni_proprietario_attuale_id_clienti_id_fk",
+          "tableFrom": "imbarcazioni",
+          "tableTo": "clienti",
+          "columnsFrom": [
+            "proprietario_attuale_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.impianti": {
+      "name": "impianti",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "imbarcazione_id": {
+          "name": "imbarcazione_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_impianto",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "modello": {
+          "name": "modello",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tensione": {
+          "name": "tensione",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "serial_number": {
+          "name": "serial_number",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "capacita": {
+          "name": "capacita",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_installazione": {
+          "name": "data_installazione",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "attivo": {
+          "name": "attivo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "impianti_imbarcazione_idx": {
+          "name": "impianti_imbarcazione_idx",
+          "columns": [
+            {
+              "expression": "imbarcazione_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "impianti_sn_idx": {
+          "name": "impianti_sn_idx",
+          "columns": [
+            {
+              "expression": "serial_number",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "impianti_tipo_idx": {
+          "name": "impianti_tipo_idx",
+          "columns": [
+            {
+              "expression": "tipo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "impianti_imbarcazione_id_imbarcazioni_id_fk": {
+          "name": "impianti_imbarcazione_id_imbarcazioni_id_fk",
+          "tableFrom": "impianti",
+          "tableTo": "imbarcazioni",
+          "columnsFrom": [
+            "imbarcazione_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.referenti_cliente": {
+      "name": "referenti_cliente",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "cliente_id": {
+          "name": "cliente_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ruolo": {
+          "name": "ruolo",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telefono": {
+          "name": "telefono",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "principale": {
+          "name": "principale",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "referenti_cliente_cliente_id_clienti_id_fk": {
+          "name": "referenti_cliente_cliente_id_clienti_id_fk",
+          "tableFrom": "referenti_cliente",
+          "tableTo": "clienti",
+          "columnsFrom": [
+            "cliente_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sedi": {
+      "name": "sedi",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "citta": {
+          "name": "citta",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "attiva": {
+          "name": "attiva",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "sedi_nome_unique": {
+          "name": "sedi_nome_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "nome"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tecnici": {
+      "name": "tecnici",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cognome": {
+          "name": "cognome",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ruolo": {
+          "name": "ruolo",
+          "type": "ruolo_tecnico",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'tecnico'"
+        },
+        "sede_id": {
+          "name": "sede_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telefono": {
+          "name": "telefono",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "costo_orario": {
+          "name": "costo_orario",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "attivo": {
+          "name": "attivo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "tecnici_sede_id_sedi_id_fk": {
+          "name": "tecnici_sede_id_sedi_id_fk",
+          "tableFrom": "tecnici",
+          "tableTo": "sedi",
+          "columnsFrom": [
+            "sede_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.accounts": {
+      "name": "accounts",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider": {
+          "name": "provider",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider_account_id": {
+          "name": "provider_account_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "token_type": {
+          "name": "token_type",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_token": {
+          "name": "id_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "session_state": {
+          "name": "session_state",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "accounts_user_id_users_id_fk": {
+          "name": "accounts_user_id_users_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "accounts_provider_provider_account_id_pk": {
+          "name": "accounts_provider_provider_account_id_pk",
+          "columns": [
+            "provider",
+            "provider_account_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.audit_log": {
+      "name": "audit_log",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tabella": {
+          "name": "tabella",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "record_id": {
+          "name": "record_id",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "azione": {
+          "name": "azione",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "diff": {
+          "name": "diff",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "audit_log_user_id_users_id_fk": {
+          "name": "audit_log_user_id_users_id_fk",
+          "tableFrom": "audit_log",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sessions": {
+      "name": "sessions",
+      "schema": "",
+      "columns": {
+        "session_token": {
+          "name": "session_token",
+          "type": "varchar(255)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sessions_user_id_users_id_fk": {
+          "name": "sessions_user_id_users_id_fk",
+          "tableFrom": "sessions",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ruolo": {
+          "name": "ruolo",
+          "type": "ruolo_utente",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'solo_lettura'"
+        },
+        "tecnico_id": {
+          "name": "tecnico_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "attivo": {
+          "name": "attivo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "email_verified": {
+          "name": "email_verified",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "users_tecnico_id_tecnici_id_fk": {
+          "name": "users_tecnico_id_tecnici_id_fk",
+          "tableFrom": "users",
+          "tableTo": "tecnici",
+          "columnsFrom": [
+            "tecnico_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.verification_tokens": {
+      "name": "verification_tokens",
+      "schema": "",
+      "columns": {
+        "identifier": {
+          "name": "identifier",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "verification_tokens_identifier_token_pk": {
+          "name": "verification_tokens_identifier_token_pk",
+          "columns": [
+            "identifier",
+            "token"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.documenti": {
+      "name": "documenti",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_documento",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preventivo_id": {
+          "name": "preventivo_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ordine_id": {
+          "name": "ordine_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "report_id": {
+          "name": "report_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fattura_id": {
+          "name": "fattura_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descrizione": {
+          "name": "descrizione",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "file_path": {
+          "name": "file_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "file_name": {
+          "name": "file_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mime_type": {
+          "name": "mime_type",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sha256": {
+          "name": "sha256",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "file_size": {
+          "name": "file_size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "uploaded_by": {
+          "name": "uploaded_by",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "uploaded_at": {
+          "name": "uploaded_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "documenti_tipo_idx": {
+          "name": "documenti_tipo_idx",
+          "columns": [
+            {
+              "expression": "tipo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "documenti_pratica_idx": {
+          "name": "documenti_pratica_idx",
+          "columns": [
+            {
+              "expression": "pratica_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.certificati": {
+      "name": "certificati",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "numero": {
+          "name": "numero",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "data_emissione": {
+          "name": "data_emissione",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "file_path": {
+          "name": "file_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "certificati_pratica_id_pratiche_id_fk": {
+          "name": "certificati_pratica_id_pratiche_id_fk",
+          "tableFrom": "certificati",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.fatture": {
+      "name": "fatture",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_fattura",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "numero": {
+          "name": "numero",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "anno_fiscale": {
+          "name": "anno_fiscale",
+          "type": "varchar(8)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "data_emissione": {
+          "name": "data_emissione",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "importo_netto": {
+          "name": "importo_netto",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "iva": {
+          "name": "iva",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "totale": {
+          "name": "totale",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stato": {
+          "name": "stato",
+          "type": "stato_fattura",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'emessa'"
+        },
+        "riferimento_sdi": {
+          "name": "riferimento_sdi",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "file_path": {
+          "name": "file_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "fatture_pratica_idx": {
+          "name": "fatture_pratica_idx",
+          "columns": [
+            {
+              "expression": "pratica_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "fatture_stato_idx": {
+          "name": "fatture_stato_idx",
+          "columns": [
+            {
+              "expression": "stato",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fatture_pratica_id_pratiche_id_fk": {
+          "name": "fatture_pratica_id_pratiche_id_fk",
+          "tableFrom": "fatture",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pagamenti": {
+      "name": "pagamenti",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "fattura_id": {
+          "name": "fattura_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "data": {
+          "name": "data",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "importo": {
+          "name": "importo",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "modalita": {
+          "name": "modalita",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "riferimento": {
+          "name": "riferimento",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "pagamenti_fattura_id_fatture_id_fk": {
+          "name": "pagamenti_fattura_id_fatture_id_fk",
+          "tableFrom": "pagamenti",
+          "tableTo": "fatture",
+          "columnsFrom": [
+            "fattura_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.report_foto": {
+      "name": "report_foto",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "report_id": {
+          "name": "report_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "file_path": {
+          "name": "file_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "didascalia": {
+          "name": "didascalia",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ordine": {
+          "name": "ordine",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "report_foto_report_id_report_interventi_id_fk": {
+          "name": "report_foto_report_id_report_interventi_id_fk",
+          "tableFrom": "report_foto",
+          "tableTo": "report_interventi",
+          "columnsFrom": [
+            "report_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.report_interventi": {
+      "name": "report_interventi",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tecnico_compilatore_id": {
+          "name": "tecnico_compilatore_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "data_intervento": {
+          "name": "data_intervento",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "orario_inizio": {
+          "name": "orario_inizio",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "orario_fine": {
+          "name": "orario_fine",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ore_lavorate": {
+          "name": "ore_lavorate",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descrizione_attivita": {
+          "name": "descrizione_attivita",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "anomalie": {
+          "name": "anomalie",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "genera_extra": {
+          "name": "genera_extra",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "extra_pratica_id": {
+          "name": "extra_pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "firma_cliente_path": {
+          "name": "firma_cliente_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "firma_tecnico_path": {
+          "name": "firma_tecnico_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nome_cliente_firma": {
+          "name": "nome_cliente_firma",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stato": {
+          "name": "stato",
+          "type": "stato_report",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'bozza'"
+        },
+        "inviato_at": {
+          "name": "inviato_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "validato_at": {
+          "name": "validato_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "report_pratica_idx": {
+          "name": "report_pratica_idx",
+          "columns": [
+            {
+              "expression": "pratica_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "report_interventi_pratica_id_pratiche_id_fk": {
+          "name": "report_interventi_pratica_id_pratiche_id_fk",
+          "tableFrom": "report_interventi",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "report_interventi_tecnico_compilatore_id_tecnici_id_fk": {
+          "name": "report_interventi_tecnico_compilatore_id_tecnici_id_fk",
+          "tableFrom": "report_interventi",
+          "tableTo": "tecnici",
+          "columnsFrom": [
+            "tecnico_compilatore_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.report_materiali": {
+      "name": "report_materiali",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "report_id": {
+          "name": "report_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "articolo_id": {
+          "name": "articolo_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descrizione": {
+          "name": "descrizione",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantita": {
+          "name": "quantita",
+          "type": "numeric(12, 3)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "da_stock": {
+          "name": "da_stock",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "report_materiali_report_id_report_interventi_id_fk": {
+          "name": "report_materiali_report_id_report_interventi_id_fk",
+          "tableFrom": "report_materiali",
+          "tableTo": "report_interventi",
+          "columnsFrom": [
+            "report_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "report_materiali_articolo_id_articoli_id_fk": {
+          "name": "report_materiali_articolo_id_articoli_id_fk",
+          "tableFrom": "report_materiali",
+          "tableTo": "articoli",
+          "columnsFrom": [
+            "articolo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.listini_cantiere": {
+      "name": "listini_cantiere",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "cantiere_id": {
+          "name": "cantiere_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "valido_da": {
+          "name": "valido_da",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "valido_a": {
+          "name": "valido_a",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "file_originale_path": {
+          "name": "file_originale_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "listini_cantiere_idx": {
+          "name": "listini_cantiere_idx",
+          "columns": [
+            {
+              "expression": "cantiere_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "listini_cantiere_cantiere_id_clienti_id_fk": {
+          "name": "listini_cantiere_cantiere_id_clienti_id_fk",
+          "tableFrom": "listini_cantiere",
+          "tableTo": "clienti",
+          "columnsFrom": [
+            "cantiere_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.listini_righe": {
+      "name": "listini_righe",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "listino_id": {
+          "name": "listino_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "modello_scafo": {
+          "name": "modello_scafo",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descrizione_articolo": {
+          "name": "descrizione_articolo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "codice_articolo": {
+          "name": "codice_articolo",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "prezzo_acquisto": {
+          "name": "prezzo_acquisto",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "prezzo_vendita": {
+          "name": "prezzo_vendita",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sconto": {
+          "name": "sconto",
+          "type": "numeric(6, 4)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "listini_righe_listino_idx": {
+          "name": "listini_righe_listino_idx",
+          "columns": [
+            {
+              "expression": "listino_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "listini_righe_modello_idx": {
+          "name": "listini_righe_modello_idx",
+          "columns": [
+            {
+              "expression": "modello_scafo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "listini_righe_listino_id_listini_cantiere_id_fk": {
+          "name": "listini_righe_listino_id_listini_cantiere_id_fk",
+          "tableFrom": "listini_righe",
+          "tableTo": "listini_cantiere",
+          "columnsFrom": [
+            "listino_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.listini_scafo_personalizzati": {
+      "name": "listini_scafo_personalizzati",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "listino_id": {
+          "name": "listino_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hull_number": {
+          "name": "hull_number",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "modello_scafo": {
+          "name": "modello_scafo",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tensione": {
+          "name": "tensione",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descrizione_articolo": {
+          "name": "descrizione_articolo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prezzo_vendita": {
+          "name": "prezzo_vendita",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "prezzo_acquisto": {
+          "name": "prezzo_acquisto",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_ordine": {
+          "name": "data_ordine",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_consegna": {
+          "name": "data_consegna",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "listini_scafo_hull_idx": {
+          "name": "listini_scafo_hull_idx",
+          "columns": [
+            {
+              "expression": "hull_number",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "listini_scafo_listino_idx": {
+          "name": "listini_scafo_listino_idx",
+          "columns": [
+            {
+              "expression": "listino_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "listini_scafo_personalizzati_listino_id_listini_cantiere_id_fk": {
+          "name": "listini_scafo_personalizzati_listino_id_listini_cantiere_id_fk",
+          "tableFrom": "listini_scafo_personalizzati",
+          "tableTo": "listini_cantiere",
+          "columnsFrom": [
+            "listino_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.master_list_hamann": {
+      "name": "master_list_hamann",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "stato": {
+          "name": "stato",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "project_manager": {
+          "name": "project_manager",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "order_no": {
+          "name": "order_no",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "serial_number": {
+          "name": "serial_number",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "yard": {
+          "name": "yard",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hull": {
+          "name": "hull",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "del_date_yard_req": {
+          "name": "del_date_yard_req",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "del_date_hamann_oc": {
+          "name": "del_date_hamann_oc",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "delay_on_yard_req": {
+          "name": "delay_on_yard_req",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "delay_on_hamann_oc": {
+          "name": "delay_on_hamann_oc",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "delivered_at": {
+          "name": "delivered_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "imported_at": {
+          "name": "imported_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "ml_sn_idx": {
+          "name": "ml_sn_idx",
+          "columns": [
+            {
+              "expression": "serial_number",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "ml_yard_hull_idx": {
+          "name": "ml_yard_hull_idx",
+          "columns": [
+            {
+              "expression": "yard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "hull",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.articoli": {
+      "name": "articoli",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "codice": {
+          "name": "codice",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "descrizione": {
+          "name": "descrizione",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "unita_misura": {
+          "name": "unita_misura",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'nr'"
+        },
+        "fornitore_default_id": {
+          "name": "fornitore_default_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "prezzo_acquisto_corrente": {
+          "name": "prezzo_acquisto_corrente",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "qta_stock": {
+          "name": "qta_stock",
+          "type": "numeric(12, 3)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "qta_sotto_scorta": {
+          "name": "qta_sotto_scorta",
+          "type": "numeric(12, 3)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'0'"
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "articoli_desc_idx": {
+          "name": "articoli_desc_idx",
+          "columns": [
+            {
+              "expression": "descrizione",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "articoli_fornitore_default_id_fornitori_id_fk": {
+          "name": "articoli_fornitore_default_id_fornitori_id_fk",
+          "tableFrom": "articoli",
+          "tableTo": "fornitori",
+          "columnsFrom": [
+            "fornitore_default_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "articoli_codice_unique": {
+          "name": "articoli_codice_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "codice"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ddt": {
+      "name": "ddt",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "numero": {
+          "name": "numero",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "data_emissione": {
+          "name": "data_emissione",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "destinatario": {
+          "name": "destinatario",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "luogo_destinazione": {
+          "name": "luogo_destinazione",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "vettore": {
+          "name": "vettore",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "causale_trasporto": {
+          "name": "causale_trasporto",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "file_path": {
+          "name": "file_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ddt_pratica_id_pratiche_id_fk": {
+          "name": "ddt_pratica_id_pratiche_id_fk",
+          "tableFrom": "ddt",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ddt_righe": {
+      "name": "ddt_righe",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ddt_id": {
+          "name": "ddt_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "articolo_id": {
+          "name": "articolo_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descrizione": {
+          "name": "descrizione",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantita": {
+          "name": "quantita",
+          "type": "numeric(12, 3)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ddt_righe_ddt_id_ddt_id_fk": {
+          "name": "ddt_righe_ddt_id_ddt_id_fk",
+          "tableFrom": "ddt_righe",
+          "tableTo": "ddt",
+          "columnsFrom": [
+            "ddt_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ddt_righe_articolo_id_articoli_id_fk": {
+          "name": "ddt_righe_articolo_id_articoli_id_fk",
+          "tableFrom": "ddt_righe",
+          "tableTo": "articoli",
+          "columnsFrom": [
+            "articolo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ordini": {
+      "name": "ordini",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_ordine",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "numero": {
+          "name": "numero",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fornitore_id": {
+          "name": "fornitore_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_ordine": {
+          "name": "data_ordine",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_consegna_prevista": {
+          "name": "data_consegna_prevista",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_consegna_effettiva": {
+          "name": "data_consegna_effettiva",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "importo": {
+          "name": "importo",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "valuta": {
+          "name": "valuta",
+          "type": "varchar(8)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'EUR'"
+        },
+        "stato": {
+          "name": "stato",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'aperto'"
+        },
+        "file_path": {
+          "name": "file_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "ordini_pratica_idx": {
+          "name": "ordini_pratica_idx",
+          "columns": [
+            {
+              "expression": "pratica_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "ordini_tipo_idx": {
+          "name": "ordini_tipo_idx",
+          "columns": [
+            {
+              "expression": "tipo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "ordini_pratica_id_pratiche_id_fk": {
+          "name": "ordini_pratica_id_pratiche_id_fk",
+          "tableFrom": "ordini",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "ordini_fornitore_id_fornitori_id_fk": {
+          "name": "ordini_fornitore_id_fornitori_id_fk",
+          "tableFrom": "ordini",
+          "tableTo": "fornitori",
+          "columnsFrom": [
+            "fornitore_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ordini_righe": {
+      "name": "ordini_righe",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ordine_id": {
+          "name": "ordine_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "articolo_id": {
+          "name": "articolo_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descrizione": {
+          "name": "descrizione",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantita": {
+          "name": "quantita",
+          "type": "numeric(12, 3)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prezzo_unitario": {
+          "name": "prezzo_unitario",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "importo": {
+          "name": "importo",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ordini_righe_ordine_id_ordini_id_fk": {
+          "name": "ordini_righe_ordine_id_ordini_id_fk",
+          "tableFrom": "ordini_righe",
+          "tableTo": "ordini",
+          "columnsFrom": [
+            "ordine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ordini_righe_articolo_id_articoli_id_fk": {
+          "name": "ordini_righe_articolo_id_articoli_id_fk",
+          "tableFrom": "ordini_righe",
+          "tableTo": "articoli",
+          "columnsFrom": [
+            "articolo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stock_movimenti": {
+      "name": "stock_movimenti",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "articolo_id": {
+          "name": "articolo_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_movimento_stock",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantita": {
+          "name": "quantita",
+          "type": "numeric(12, 3)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ordine_id": {
+          "name": "ordine_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ddt_id": {
+          "name": "ddt_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data": {
+          "name": "data",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stock_movimenti_articolo_id_articoli_id_fk": {
+          "name": "stock_movimenti_articolo_id_articoli_id_fk",
+          "tableFrom": "stock_movimenti",
+          "tableTo": "articoli",
+          "columnsFrom": [
+            "articolo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "stock_movimenti_pratica_id_pratiche_id_fk": {
+          "name": "stock_movimenti_pratica_id_pratiche_id_fk",
+          "tableFrom": "stock_movimenti",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "stock_movimenti_ordine_id_ordini_id_fk": {
+          "name": "stock_movimenti_ordine_id_ordini_id_fk",
+          "tableFrom": "stock_movimenti",
+          "tableTo": "ordini",
+          "columnsFrom": [
+            "ordine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "stock_movimenti_ddt_id_ddt_id_fk": {
+          "name": "stock_movimenti_ddt_id_ddt_id_fk",
+          "tableFrom": "stock_movimenti",
+          "tableTo": "ddt",
+          "columnsFrom": [
+            "ddt_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.assegnazioni_intervento": {
+      "name": "assegnazioni_intervento",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tecnico_id": {
+          "name": "tecnico_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sede_id": {
+          "name": "sede_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data": {
+          "name": "data",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "orario_da": {
+          "name": "orario_da",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "orario_a": {
+          "name": "orario_a",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stato": {
+          "name": "stato",
+          "type": "stato_assegnazione",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'pianificato'"
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "assegnazioni_data_idx": {
+          "name": "assegnazioni_data_idx",
+          "columns": [
+            {
+              "expression": "data",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "assegnazioni_tecnico_data_idx": {
+          "name": "assegnazioni_tecnico_data_idx",
+          "columns": [
+            {
+              "expression": "tecnico_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "data",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "assegnazioni_pratica_idx": {
+          "name": "assegnazioni_pratica_idx",
+          "columns": [
+            {
+              "expression": "pratica_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "assegnazioni_intervento_pratica_id_pratiche_id_fk": {
+          "name": "assegnazioni_intervento_pratica_id_pratiche_id_fk",
+          "tableFrom": "assegnazioni_intervento",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "assegnazioni_intervento_tecnico_id_tecnici_id_fk": {
+          "name": "assegnazioni_intervento_tecnico_id_tecnici_id_fk",
+          "tableFrom": "assegnazioni_intervento",
+          "tableTo": "tecnici",
+          "columnsFrom": [
+            "tecnico_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "assegnazioni_intervento_sede_id_sedi_id_fk": {
+          "name": "assegnazioni_intervento_sede_id_sedi_id_fk",
+          "tableFrom": "assegnazioni_intervento",
+          "tableTo": "sedi",
+          "columnsFrom": [
+            "sede_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pratiche": {
+      "name": "pratiche",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "codice": {
+          "name": "codice",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "anno_riferimento": {
+          "name": "anno_riferimento",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cliente_id": {
+          "name": "cliente_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "imbarcazione_id": {
+          "name": "imbarcazione_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sede_intervento_id": {
+          "name": "sede_intervento_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stato": {
+          "name": "stato",
+          "type": "stato_pratica",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'richiesta'"
+        },
+        "tipo_lavoro": {
+          "name": "tipo_lavoro",
+          "type": "tipo_lavoro",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descrizione_problema": {
+          "name": "descrizione_problema",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tempistiche_richieste": {
+          "name": "tempistiche_richieste",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pratica_padre_id": {
+          "name": "pratica_padre_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_apertura": {
+          "name": "data_apertura",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "data_chiusura": {
+          "name": "data_chiusura",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "pratiche_codice_anno_uq": {
+          "name": "pratiche_codice_anno_uq",
+          "columns": [
+            {
+              "expression": "codice",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "anno_riferimento",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pratiche_stato_idx": {
+          "name": "pratiche_stato_idx",
+          "columns": [
+            {
+              "expression": "stato",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pratiche_cliente_idx": {
+          "name": "pratiche_cliente_idx",
+          "columns": [
+            {
+              "expression": "cliente_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pratiche_imbarcazione_idx": {
+          "name": "pratiche_imbarcazione_idx",
+          "columns": [
+            {
+              "expression": "imbarcazione_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "pratiche_cliente_id_clienti_id_fk": {
+          "name": "pratiche_cliente_id_clienti_id_fk",
+          "tableFrom": "pratiche",
+          "tableTo": "clienti",
+          "columnsFrom": [
+            "cliente_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "pratiche_imbarcazione_id_imbarcazioni_id_fk": {
+          "name": "pratiche_imbarcazione_id_imbarcazioni_id_fk",
+          "tableFrom": "pratiche",
+          "tableTo": "imbarcazioni",
+          "columnsFrom": [
+            "imbarcazione_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "pratiche_sede_intervento_id_sedi_id_fk": {
+          "name": "pratiche_sede_intervento_id_sedi_id_fk",
+          "tableFrom": "pratiche",
+          "tableTo": "sedi",
+          "columnsFrom": [
+            "sede_intervento_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pratiche_impianti": {
+      "name": "pratiche_impianti",
+      "schema": "",
+      "columns": {
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "impianto_id": {
+          "name": "impianto_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "pratiche_impianti_pratica_id_pratiche_id_fk": {
+          "name": "pratiche_impianti_pratica_id_pratiche_id_fk",
+          "tableFrom": "pratiche_impianti",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "pratiche_impianti_pratica_id_impianto_id_pk": {
+          "name": "pratiche_impianti_pratica_id_impianto_id_pk",
+          "columns": [
+            "pratica_id",
+            "impianto_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pratiche_tecnici": {
+      "name": "pratiche_tecnici",
+      "schema": "",
+      "columns": {
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tecnico_id": {
+          "name": "tecnico_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ruolo_nella_pratica": {
+          "name": "ruolo_nella_pratica",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "pratiche_tecnici_pratica_id_pratiche_id_fk": {
+          "name": "pratiche_tecnici_pratica_id_pratiche_id_fk",
+          "tableFrom": "pratiche_tecnici",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "pratiche_tecnici_tecnico_id_tecnici_id_fk": {
+          "name": "pratiche_tecnici_tecnico_id_tecnici_id_fk",
+          "tableFrom": "pratiche_tecnici",
+          "tableTo": "tecnici",
+          "columnsFrom": [
+            "tecnico_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "pratiche_tecnici_pratica_id_tecnico_id_pk": {
+          "name": "pratiche_tecnici_pratica_id_tecnico_id_pk",
+          "columns": [
+            "pratica_id",
+            "tecnico_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.transizioni_pratica": {
+      "name": "transizioni_pratica",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stato_da": {
+          "name": "stato_da",
+          "type": "stato_pratica",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stato_a": {
+          "name": "stato_a",
+          "type": "stato_pratica",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "evento": {
+          "name": "evento",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "payload": {
+          "name": "payload",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "utente_id": {
+          "name": "utente_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "transizioni_pratica_pratica_id_pratiche_id_fk": {
+          "name": "transizioni_pratica_pratica_id_pratiche_id_fk",
+          "tableFrom": "transizioni_pratica",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.preventivi": {
+      "name": "preventivi",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "pratica_id": {
+          "name": "pratica_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "codice_offerta": {
+          "name": "codice_offerta",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "versione": {
+          "name": "versione",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "totale_netto": {
+          "name": "totale_netto",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sconto": {
+          "name": "sconto",
+          "type": "numeric(6, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iva": {
+          "name": "iva",
+          "type": "numeric(6, 2)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'22'"
+        },
+        "totale_lordo": {
+          "name": "totale_lordo",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "validita_giorni": {
+          "name": "validita_giorni",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 30
+        },
+        "file_generato_path": {
+          "name": "file_generato_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "file_firmato_path": {
+          "name": "file_firmato_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_invio": {
+          "name": "data_invio",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "data_accettazione": {
+          "name": "data_accettazione",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "modalita_accettazione": {
+          "name": "modalita_accettazione",
+          "type": "modalita_accettazione",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "riferimento_po": {
+          "name": "riferimento_po",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "preventivi_pratica_idx": {
+          "name": "preventivi_pratica_idx",
+          "columns": [
+            {
+              "expression": "pratica_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "preventivi_pratica_id_pratiche_id_fk": {
+          "name": "preventivi_pratica_id_pratiche_id_fk",
+          "tableFrom": "preventivi",
+          "tableTo": "pratiche",
+          "columnsFrom": [
+            "pratica_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.preventivi_righe": {
+      "name": "preventivi_righe",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "preventivo_id": {
+          "name": "preventivo_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_preventivo_riga",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "descrizione": {
+          "name": "descrizione",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "codice_articolo": {
+          "name": "codice_articolo",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "impianto_id": {
+          "name": "impianto_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "quantita": {
+          "name": "quantita",
+          "type": "numeric(12, 3)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'1'"
+        },
+        "unita_misura": {
+          "name": "unita_misura",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'nr'"
+        },
+        "prezzo_unitario": {
+          "name": "prezzo_unitario",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "sconto": {
+          "name": "sconto",
+          "type": "numeric(6, 2)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'0'"
+        },
+        "importo": {
+          "name": "importo",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "ordine": {
+          "name": "ordine",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "preventivi_righe_prev_idx": {
+          "name": "preventivi_righe_prev_idx",
+          "columns": [
+            {
+              "expression": "preventivo_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "preventivi_righe_preventivo_id_preventivi_id_fk": {
+          "name": "preventivi_righe_preventivo_id_preventivi_id_fk",
+          "tableFrom": "preventivi_righe",
+          "tableTo": "preventivi",
+          "columnsFrom": [
+            "preventivo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "preventivi_righe_impianto_id_impianti_id_fk": {
+          "name": "preventivi_righe_impianto_id_impianti_id_fk",
+          "tableFrom": "preventivi_righe",
+          "tableTo": "impianti",
+          "columnsFrom": [
+            "impianto_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.modalita_accettazione": {
+      "name": "modalita_accettazione",
+      "schema": "public",
+      "values": [
+        "firma",
+        "PO"
+      ]
+    },
+    "public.ruolo_tecnico": {
+      "name": "ruolo_tecnico",
+      "schema": "public",
+      "values": [
+        "tecnico",
+        "responsabile_linea",
+        "officina",
+        "trasferta"
+      ]
+    },
+    "public.ruolo_utente": {
+      "name": "ruolo_utente",
+      "schema": "public",
+      "values": [
+        "admin",
+        "amministrazione",
+        "tecnico_ufficio",
+        "tecnico_campo",
+        "responsabile_linea",
+        "solo_lettura"
+      ]
+    },
+    "public.stato_assegnazione": {
+      "name": "stato_assegnazione",
+      "schema": "public",
+      "values": [
+        "pianificato",
+        "confermato",
+        "in_corso",
+        "completato",
+        "annullato"
+      ]
+    },
+    "public.stato_fattura": {
+      "name": "stato_fattura",
+      "schema": "public",
+      "values": [
+        "emessa",
+        "inviata",
+        "pagata_parziale",
+        "pagata",
+        "insoluta",
+        "annullata"
+      ]
+    },
+    "public.stato_pratica": {
+      "name": "stato_pratica",
+      "schema": "public",
+      "values": [
+        "richiesta",
+        "offerta",
+        "in_attesa_accettazione",
+        "accettata",
+        "in_attesa_pagamento",
+        "materiale_in_arrivo",
+        "pianificata",
+        "in_esecuzione",
+        "chiusura_tecnica",
+        "da_fatturare",
+        "chiusa",
+        "annullata"
+      ]
+    },
+    "public.stato_report": {
+      "name": "stato_report",
+      "schema": "public",
+      "values": [
+        "bozza",
+        "inviato",
+        "validato"
+      ]
+    },
+    "public.tipo_cliente": {
+      "name": "tipo_cliente",
+      "schema": "public",
+      "values": [
+        "cantiere",
+        "bordo",
+        "fornitore_misto"
+      ]
+    },
+    "public.tipo_documento": {
+      "name": "tipo_documento",
+      "schema": "public",
+      "values": [
+        "preventivo",
+        "preventivo_firmato",
+        "PO_cliente",
+        "ordine_fornitore",
+        "report_intervento",
+        "certificato",
+        "ddt",
+        "fattura",
+        "foto_intervento",
+        "listino",
+        "altro"
+      ]
+    },
+    "public.tipo_fattura": {
+      "name": "tipo_fattura",
+      "schema": "public",
+      "values": [
+        "proforma",
+        "SAL",
+        "finale",
+        "nota_credito"
+      ]
+    },
+    "public.tipo_impianto": {
+      "name": "tipo_impianto",
+      "schema": "public",
+      "values": [
+        "HAG_SEWAGE",
+        "DVZ_OWS",
+        "DVZ_STP",
+        "DVZ_GT",
+        "MATRIX",
+        "AP_MARINE",
+        "BIO_SEA",
+        "SKF",
+        "DAMEN",
+        "ALTRO"
+      ]
+    },
+    "public.tipo_lavoro": {
+      "name": "tipo_lavoro",
+      "schema": "public",
+      "values": [
+        "TG_A",
+        "TG_A_1F",
+        "TG_A_2F",
+        "TG_B",
+        "TG_B_1F",
+        "TG_S",
+        "TG_AVV",
+        "TG_WARR",
+        "TG_ISP",
+        "TG_OFF",
+        "MAN_1Y",
+        "MAN_2Y",
+        "EXTRA",
+        "FORNITURA",
+        "TRAINING",
+        "ALTRO"
+      ]
+    },
+    "public.tipo_movimento_stock": {
+      "name": "tipo_movimento_stock",
+      "schema": "public",
+      "values": [
+        "carico",
+        "scarico",
+        "rettifica",
+        "reso"
+      ]
+    },
+    "public.tipo_ordine": {
+      "name": "tipo_ordine",
+      "schema": "public",
+      "values": [
+        "cliente_in",
+        "fornitore_out"
+      ]
+    },
+    "public.tipo_preventivo_riga": {
+      "name": "tipo_preventivo_riga",
+      "schema": "public",
+      "values": [
+        "ricambio",
+        "manodopera",
+        "trasferta",
+        "officina",
+        "altro"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
