@@ -8,7 +8,7 @@ until node -e "const {Client}=require('pg');const c=new Client({connectionString
 done
 
 echo "==> Migrazioni..."
-node -e "require('tsx/cjs').register?.(); require('./db/migrate.ts')" 2>/dev/null || npx tsx db/migrate.ts || true
+( cd /opt/migrate && node migrate.cjs )
 
 echo "==> Avvio Next prod..."
 exec node server.js

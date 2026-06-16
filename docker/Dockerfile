@@ -29,8 +29,10 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/db ./db
 COPY --from=builder /app/drizzle.config.ts ./
-COPY --from=builder /app/node_modules/tsx ./node_modules/tsx
-COPY --from=builder /app/node_modules/.bin/tsx ./node_modules/.bin/tsx
+# Toolchain isolato per le migrazioni: node_modules completo + migratore CJS.
+# Evita tsx/esbuild (assenti nel bundle standalone) e non tocca il server.
+COPY --from=deps /app/node_modules /opt/migrate/node_modules
+COPY --from=builder /app/db/migrate.cjs /opt/migrate/migrate.cjs
 COPY docker/entrypoint-prod.sh /entrypoint-prod.sh
 RUN chmod +x /entrypoint-prod.sh && mkdir -p /app/uploads
 EXPOSE 3000
