@@ -44,7 +44,6 @@ const getBadges = unstable_cache(
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
   if (!session) redirect("/login");
-  const user = session.user as any;
   const b = await getBadges();
 
   const nav: Array<{ href: string; label: string; icon: any; badge?: number; badgeColor?: string }> = [
@@ -106,9 +105,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             );
           })}
         </nav>
-        <div className="p-3 border-t text-xs text-muted-foreground">
-          Loggato come <b>{user?.email}</b>
-        </div>
       </aside>
       <div className="flex flex-col min-w-0">
         <header className="flex items-center justify-between border-b px-4 md:px-6 h-14 bg-card gap-3">
